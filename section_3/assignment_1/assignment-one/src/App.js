@@ -3,24 +3,24 @@ import './App.css';
 import UserInput from './UserInput/UserInput';
 import UserOutput from './UserOutput/UserOutput'
 class App extends Component {
-state ={ 
-    client: [
-    {name: "andres", last: "ardila"},
-    {name: "cliff", last: "ford"}
+  state = {
 
-  ]
-};
+    username: "cliff"
 
- 
+  };
+
+  userNameChangedHandler = (event) => {
+    this.setState({ username: event.target.value });
+  }
 
 
   render() {
     return (
       <div className="App">
-          <UserInput></UserInput>
-          <UserOutput userName="Andres Ardila"></UserOutput>
-          <UserOutput uName={this.state.client[0].name}></UserOutput>
-          <UserOutput></UserOutput>
+        <UserInput changed={this.userNameChangedHandler}></UserInput>
+        <UserOutput userName="Andres Ardila"></UserOutput>
+        <UserOutput uName={this.state.username}></UserOutput>
+        <UserOutput></UserOutput>
       </div>
     );
   }
