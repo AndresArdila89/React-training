@@ -7,26 +7,14 @@ import Person from './Person/Person';
 class App extends Component {
   state = {
     persons: [
-      { name: 'Max', age: 22 },
-      { name: 'Manu', age: 29 },
-      { name: 'Stephanie', age: 26 }
+      { id: "1234", name: 'Max', age: 22 },
+      { id: "1235", name: 'Manu', age: 29 },
+      { id: "1236", name: 'Stephanie', age: 26 }
     ],
     otherState: "new state",
     showPersons: false,
     buttonName: false
   }
-
-  switchNameHandler = (newName) => {
-    // console.log('was click');
-    this.setState({
-      persons: [
-        { name: newName, age: 20 },
-        { name: 'Manu', age: 19 },
-        { name: 'Stephanie', age: 18 }
-      ]
-    })
-  }
-
 
   nameChangeHandler = (event) => {
     this.setState({
@@ -37,6 +25,12 @@ class App extends Component {
       ]
     })
 
+  }
+
+  deletePersonHandler = (personIndex) => {
+    const persons = [...this.state.persons];
+    persons.splice(personIndex, 1);
+    this.setState({ persons: persons });
   }
 
   toglePersonHandler = () => {
@@ -64,8 +58,12 @@ class App extends Component {
       persons = (
         <div>
           {
-            this.state.persons.map(person => {
-              return <Person name={person.name} age={person.age} />
+            this.state.persons.map((person, index) => {
+              return <Person
+                click={() => this.deletePersonHandler(index)}
+                name={person.name}
+                age={person.age}
+                key={person.id} />
             })
           }
 
